@@ -3,7 +3,11 @@
 import os
 
 # Gemini API
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
+# in bash`export GEMINI_API_KEY="your_api_key_here"`
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise RuntimeError("GEMINI_API_KEY not set")
+
 MODEL_NAME = "gemini-2.5-pro" #models/gemini-2.5-pro
 
 # Data settings
