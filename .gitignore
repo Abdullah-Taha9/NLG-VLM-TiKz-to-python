@@ -1,0 +1,7 @@
+# Ignore output directory
+output
+# deafult ignores
+__pycache__
+.env
+pipeline_no_img.py
+draft
