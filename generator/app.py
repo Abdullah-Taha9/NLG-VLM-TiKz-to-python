@@ -68,11 +68,12 @@ def get_sample_info(index: int):
     sample = DATA[index]
     original_img = sample.get("image")
     caption = sample.get("caption", "No caption")
+    caption = sample.get("caption", "")
     tikz_code = sample.get("code", "")
     
     return original_img, caption, tikz_code, f"Sample {index + 1} / {TOTAL}"
 
-
+# not needed anymore, using yield instead
 def generate_matplotlib(index: int):
     """Run LLM pipeline using existing chain and generate matplotlib image."""
     sample = DATA[index]
@@ -138,8 +139,24 @@ with gr.Blocks(theme=gr.themes.Soft()) as app:
         return navigate(idx, 1)
     
     def run_generate(idx):
-        gen_img, code = generate_matplotlib(idx)
-        return gen_img, code
+        """Yield progressive updates: Code first, then Image."""
+        sample = DATA[idx]
+        
+        # 1. Generate Code (Yield immediately)
+        python_code = invoke_chain(
+            image=sample["image"],
+            caption=sample["caption"],
+            tikz_code=sample["code"]
+        )
+        
+        # Yield code + placeholder/loading image
+        yield None, python_code
+        
+        # 2. Generate Image
+        gen_img = execute_code(python_code)
+        
+        # Yield final image + code
+        yield gen_img, python_code
     
     prev_btn.click(
         fn=go_prev,

@@ -18,3 +18,20 @@ export GEMINI_API_KEY=your_gemini_api_key
 ```bash
 python app.py
 ```
+
+### Make sure Latex engine is installed (some python codes requires latex as it is used in matplotlib, we can instruct the LLM not to include it):
+```bash
+sudo apt update
+sudo apt install -y \
+  texlive-latex-base \
+  texlive-latex-extra \
+  texlive-fonts-recommended \
+  texlive-fonts-extra \
+  dvipng
+
+```
+#### verify it is installed:
+```bash
+latex --version
+dvipng --version
+```
