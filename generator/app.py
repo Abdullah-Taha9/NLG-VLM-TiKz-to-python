@@ -3,7 +3,7 @@
 import sys
 import os
 
-# Add parent directory to path to import chain module
+# Add parent directory to path to import existing modules
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import io
@@ -12,19 +12,10 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from PIL import Image
-from datasets import load_dataset
 
+# Import from existing modules (no duplication!)
+from data_loader import load_data
 from chain import invoke_chain
-from config import DATA_LIMIT
-
-
-def load_arxiv_data(limit: int = DATA_LIMIT):
-    """Load DaTikZ dataset, filter arxiv origin, and limit rows."""
-    dataset = load_dataset("nllg/datikz-v3", split="train")
-    dataset = dataset.filter(lambda x: x["origin"] == "arxiv")
-    if limit:
-        dataset = dataset.select(range(min(limit, len(dataset))))
-    return dataset
 
 
 def execute_code(python_code: str) -> Image.Image:
@@ -65,9 +56,9 @@ def execute_code(python_code: str) -> Image.Image:
         return img
 
 
-# Load dataset once
+# Load dataset using existing data_loader
 print("Loading dataset...")
-DATA = load_arxiv_data()
+DATA = load_data()
 TOTAL = len(DATA)
 print(f"Loaded {TOTAL} samples")
 
@@ -83,10 +74,10 @@ def get_sample_info(index: int):
 
 
 def generate_matplotlib(index: int):
-    """Run LLM pipeline and generate matplotlib image."""
+    """Run LLM pipeline using existing chain and generate matplotlib image."""
     sample = DATA[index]
     
-    # Call the LLM chain
+    # Use existing invoke_chain function
     python_code = invoke_chain(
         image=sample["image"],
         caption=sample["caption"],
@@ -181,3 +172,4 @@ with gr.Blocks(theme=gr.themes.Soft()) as app:
 
 if __name__ == "__main__":
     app.launch()
+
