@@ -4,6 +4,8 @@ import os
 
 # Gemini API
 # in bash`export GEMINI_API_KEY="your_api_key_here"`
+# in cmd `set GEMINI_API_KEY=your_api_key_here`
+# in powershell `$env:GEMINI_API_KEY="your_api_key_here"`
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY not set")
