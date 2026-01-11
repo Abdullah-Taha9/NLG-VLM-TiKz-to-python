@@ -1,5 +1,5 @@
 # Ignore output directory
-output
+
 # deafult ignores
 __pycache__
 .env
