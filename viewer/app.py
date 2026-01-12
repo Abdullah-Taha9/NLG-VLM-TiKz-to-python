@@ -38,7 +38,8 @@ def execute_code(python_code: str) -> Image.Image:
         "__builtins__": __builtins__,
         "__name__": "__main__",   # <-- key fix
     }
-    
+
+
     try:
         # Execute the code
         exec(python_code, namespace)
