@@ -32,7 +32,12 @@ def execute_code(python_code: str) -> Image.Image:
     plt.close('all')
     
     # Create a namespace for execution
-    namespace = {"plt": plt, "__builtins__": __builtins__}
+    # namespace = {"plt": plt, "__builtins__": __builtins__}
+    namespace = {
+        "plt": plt,
+        "__builtins__": __builtins__,
+        "__name__": "__main__",   # <-- key fix
+    }
     
     try:
         # Execute the code
