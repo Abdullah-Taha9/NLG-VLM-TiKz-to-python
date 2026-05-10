@@ -1,6 +1,6 @@
-# PYVEC Dataset and Training Pipeline
+# plotcraft-text-to-python
 
-PYVEC is a repository for building and evaluating models that generate Python/Matplotlib visualizations. It combines a curated training dataset, raw scraping outputs, rule-based data augmentation, training code for SFT and GRPO, a lightweight viewer for qualitative inspection, and human-evaluation artifacts.
+plotcraft-text-to-python is a repository for building and evaluating models that generate Python/Matplotlib visualizations. It combines a curated training dataset, raw scraping outputs, rule-based data augmentation, training code for SFT and GRPO, a lightweight viewer for qualitative inspection, and human-evaluation artifacts.
 
 
 ## What Is In This Repository?
