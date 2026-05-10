@@ -1,0 +1,16 @@
+torch
+transformers
+trl
+peft
+datasets
+orjson
+accelerate
+deepspeed
+hydra-core
+omegaconf
+qwen-vl-utils
+dreamsim
+POT
+pdfCropMargins
+wandb
+tensorboard

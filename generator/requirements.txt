@@ -1,7 +1,0 @@
-gradio
-langchain
-langchain-google-genai
-datasets
-Pillow
-matplotlib
-numpy
